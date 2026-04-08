@@ -99,6 +99,11 @@ public class Login extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Login");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("I don't have an account");
 
@@ -186,6 +191,27 @@ public class Login extends javax.swing.JFrame {
         SignUpFrame.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String email = jTextField1.getText();
+        String password = new String(jPasswordField1.getPassword());
+        
+        if(email.isEmpty()||password.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Please fill up all fields!", "Error",javax.swing.JOptionPane.ERROR_MESSAGE);
+    }
+        else if(email.equals("ziana@gmail.com")&&password.equals("zianadmin")) {
+        
+            Dashboard DashboardFrame = new Dashboard();
+            DashboardFrame.setVisible(true);
+            DashboardFrame.pack();
+            DashboardFrame.setLocationRelativeTo(null);
+            this.dispose();
+    }
+        else{
+            javax.swing.JOptionPane.showMessageDialog(this, "No account found! Please Sign Up first.", "Login Failed!",javax.swing.JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -7,6 +7,7 @@ public class Dashboard extends javax.swing.JFrame {
     public Dashboard() {
         initComponents();
         jPanel2.setSize(this.getWidth(),jPanel2.getHeight());
+        this.setLocationRelativeTo(null);
         
         lblTotalUsers.setText("TOTAL USERS");
         lblActiveProjects.setText("ACTIVE PROJECTS");

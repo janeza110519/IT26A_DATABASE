@@ -228,9 +228,9 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String emailInput = jTextField1.getText(); 
-        String usernameInput = jTextField2.getText();
-        String passwordInput = new String(jPasswordField1.getPassword());
+        String emailInput = jTextField1.getText().trim(); 
+        String usernameInput = jTextField2.getText().trim();
+        String passwordInput = new String(jPasswordField1.getPassword()).trim();
         
         if(Login.registeredEmail == null || Login.registeredEmail.isEmpty()) {
             javax.swing.JOptionPane.showMessageDialog(this, "No accound found! Please Sign Up first.", "Login Failed!", javax.swing.JOptionPane.WARNING_MESSAGE);

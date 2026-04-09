@@ -228,10 +228,10 @@ public class Signup extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String fullname = jTextField1.getText();
-        String email = jTextField2.getText();
-        String username = jTextField2.getText();
-        String password = new String(jPasswordField1.getPassword());
+        String fullname = jTextField1.getText().trim();
+        String email = jTextField3.getText().trim();
+        String username = jTextField2.getText().trim();
+        String password = new String(jPasswordField1.getPassword()).trim();
         
         if(fullname.isEmpty()||email.isEmpty()|| username.isEmpty() || password.isEmpty()) {
             javax.swing.JOptionPane.showMessageDialog(this, "All fields are required!", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
@@ -240,6 +240,10 @@ public class Signup extends javax.swing.JFrame {
             Login.registeredEmail = email;
             Login.registeredUsername = username;
             Login.registeredPassword = password;
+            
+            System.out.println(Login.registeredEmail);
+            System.out.println(Login.registeredUsername);
+            System.out.println(Login.registeredPassword);
             
             javax.swing.JOptionPane.showMessageDialog(this, "Account Created Successfully!", "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
             

@@ -3,6 +3,9 @@ package MIDTERM;
 
 
 public class Login extends javax.swing.JFrame {
+    
+    public static String registeredEmail;
+    public static String registeredPassword;
 
     
     public Login() {
@@ -194,22 +197,25 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String email = jTextField1.getText();
-        String password = new String(jPasswordField1.getPassword());
+        String emailInput = jTextField1.getText(); 
+        String passwordInput = new String(jPasswordField1.getPassword());
+
+    if (Login.registeredEmail == null || Login.registeredEmail.isEmpty()) {
+         javax.swing.JOptionPane.showMessageDialog(this, "No account found! Please Sign Up first.", "Login Failed", javax.swing.JOptionPane.WARNING_MESSAGE);
+    } 
+   
+    else if (emailInput.equals(Login.registeredEmail) && passwordInput.equals(Login.registeredPassword)) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Login Successful!", "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
         
-        if(email.isEmpty()||password.isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Please fill up all fields!", "Error",javax.swing.JOptionPane.ERROR_MESSAGE);
-    }
-        else if(email.equals("ziana@gmail.com")&&password.equals("zianadmin")) {
+        Dashboard dash = new Dashboard();
+        dash.setVisible(true);
+        dash.pack();
+        dash.setLocationRelativeTo(null);
+        this.dispose();
         
-            Dashboard DashboardFrame = new Dashboard();
-            DashboardFrame.setVisible(true);
-            DashboardFrame.pack();
-            DashboardFrame.setLocationRelativeTo(null);
-            this.dispose();
-    }
-        else{
-            javax.swing.JOptionPane.showMessageDialog(this, "No account found! Please Sign Up first.", "Login Failed!",javax.swing.JOptionPane.WARNING_MESSAGE);
+    } else {
+        javax.swing.JOptionPane.showMessageDialog(this, "Invalid Email or Password!", "Login Failed", javax.swing.JOptionPane.ERROR_MESSAGE);
+
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

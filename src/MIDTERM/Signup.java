@@ -81,13 +81,11 @@ public class Signup extends javax.swing.JFrame {
         jLabel4.setText("Full name");
 
         jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setText("Email");
 
         jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField2.setForeground(new java.awt.Color(255, 255, 255));
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
@@ -98,7 +96,6 @@ public class Signup extends javax.swing.JFrame {
         jLabel6.setText("Password");
 
         jPasswordField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jPasswordField1.setForeground(new java.awt.Color(255, 255, 255));
         jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPasswordField1ActionPerformed(evt);
@@ -223,6 +220,10 @@ public class Signup extends javax.swing.JFrame {
         if(fullname.isEmpty()||email.isEmpty()||password.isEmpty()) {
             javax.swing.JOptionPane.showMessageDialog(this, "All fields are required!", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
         } else {
+            
+            Login.registeredEmail = email;
+            Login.registeredPassword = password;
+            
             javax.swing.JOptionPane.showMessageDialog(this, "Account Created Successfully!", "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
             
             Login LoginFrame = new Login();

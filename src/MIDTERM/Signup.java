@@ -215,28 +215,25 @@ public class Signup extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String fullname = jTextField1.getText();
+        String fullname = jTextField2.getText();
         String email = jTextField2.getText();
         String password = new String(jPasswordField1.getPassword());
         
         if(fullname.isEmpty()||email.isEmpty()||password.isEmpty()) {
             javax.swing.JOptionPane.showMessageDialog(this, "All fields are required!", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
         } else {
-          try {
-                
-             java.io.FileWriter writer = new java.io.FileWriter("user_data.text");
-             writer.write(email + "\n" + password);
-             writer.close();
             
+            Login.registeredEmail = email;
+            Login.registeredPassword = password;
             
             javax.swing.JOptionPane.showMessageDialog(this, "Account Created Successfully!", "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
             
             Login LoginFrame = new Login();
             LoginFrame.setVisible(true);
+            LoginFrame.pack();
+            
+            LoginFrame.setLocationRelativeTo(null);
             this.dispose();
-        } catch (java.io.IOException e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Error saving account!", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-        }
     }//GEN-LAST:event_jButton1ActionPerformed
 }
     /**

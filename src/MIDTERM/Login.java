@@ -203,30 +203,21 @@ public class Login extends javax.swing.JFrame {
         String emailInput = jTextField1.getText(); 
         String passwordInput = new String(jPasswordField1.getPassword());
         
-        java.io.File file = new java.io.File("user_data.txt");
+        if(Login.registeredEmail == null || Login.registeredEmail.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "No accound found! Please Sign Up first.", "Login Failed!", javax.swing.JOptionPane.WARNING_MESSAGE);
+        }
         
-        if(!file.exists()) {
-            javax.swing.JOptionPane.showMessageDialog(this, "No account found! Please Sign Up first.", "Login failed!", javax.swing.JOptionPane.WARNING_MESSAGE);
+        else if(emailInput.equals(Login.registeredEmail) && passwordInput.equals(Login.registeredPassword)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Login Successfully!", "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            
+            Dashboard dash = new Dashboard();
+            dash.setVisible(true);
+            dash.pack();
+            dash.setLocationRelativeTo(null);
+            this.dispose();
+            
         } else {
-            try {
-                java.util.Scanner reader = new java.util.Scanner(file);
-                String savedEmail = reader.nextLine();
-                String savedPassword = reader.nextLine();
-                reader.close();
-                
-                if(emailInput.equals(savedEmail)&&passwordInput.equals(savedPassword)) {
-                    javax.swing.JOptionPane.showMessageDialog(this, "Login Successful1", "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-                    
-                    Dashboard dash = new Dashboard();
-                    dash.setVisible(true);
-                    this.dispose();
-                } else {
-                    javax.swing.JOptionPane.showMessageDialog(this, "Invalid Email or Password!", "Login Failed", javax.swing.JOptionPane.ERROR_MESSAGE);
-                }
-            } catch (java.io.FileNotFoundException e) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Account file not found!", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-                
-            }
+            javax.swing.JOptionPane.showMessageDialog(this, "Invalid Email or Password!", "Login Failed.", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

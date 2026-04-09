@@ -1,6 +1,11 @@
 
 package MIDTERM;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+
 
 public class Signup extends javax.swing.JFrame {
 
@@ -234,25 +239,30 @@ public class Signup extends javax.swing.JFrame {
         String password = new String(jPasswordField1.getPassword()).trim();
         
         if(fullname.isEmpty()||email.isEmpty()|| username.isEmpty() || password.isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(this, "All fields are required!", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-        } else {
+            JOptionPane.showMessageDialog(this, "All fields are required!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        try {
+            Connection con = DBConnection.getConnection();
             
-            Login.registeredEmail = email;
-            Login.registeredUsername = username;
-            Login.registeredPassword = password;
+            String sql = "INSERT INTO user (Username, Password, Email, Full_name) VALUES (?,?,?,?)";
             
-            System.out.println(Login.registeredEmail);
-            System.out.println(Login.registeredUsername);
-            System.out.println(Login.registeredPassword);
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setString(1, username);
+            pst.setString(2, password);
+            pst.setString(3, email);
+            pst.setString(4, fullname);
             
-            javax.swing.JOptionPane.showMessageDialog(this, "Account Created Successfully!", "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            pst.executeUpdate();
             
-            Login LoginFrame = new Login();
-            LoginFrame.setVisible(true);
-            LoginFrame.pack();
+            JOptionPane.showMessageDialog(this, "Account Created successfully!");
             
-            LoginFrame.setLocationRelativeTo(null);
+            new Login().setVisible(true);
             this.dispose();
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Signup Error: " + e.getMessage());
     }//GEN-LAST:event_jButton1ActionPerformed
 }
     /**

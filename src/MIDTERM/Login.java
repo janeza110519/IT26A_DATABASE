@@ -1,13 +1,14 @@
 
 package MIDTERM;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+
 
 public class Login extends javax.swing.JFrame {
     
-    public static String registeredEmail;
-    public static String registeredUsername;
-    public static String registeredPassword;
-
     
     public Login() {
         initComponents();
@@ -232,21 +233,31 @@ public class Login extends javax.swing.JFrame {
         String usernameInput = jTextField2.getText().trim();
         String passwordInput = new String(jPasswordField1.getPassword()).trim();
         
-        if(Login.registeredEmail == null || Login.registeredEmail.isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(this, "No accound found! Please Sign Up first.", "Login Failed!", javax.swing.JOptionPane.WARNING_MESSAGE);
-        }
-        
-        else if(emailInput.equals(Login.registeredEmail) && usernameInput.equals(Login.registeredUsername) && passwordInput.equals(Login.registeredPassword)) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Login Successfully!", "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        try {
+            Connection con = DBConnection.getConnection();
             
-            Dashboard dash = new Dashboard();
-            dash.setVisible(true);
-            dash.pack();
-            dash.setLocationRelativeTo(null);
-            this.dispose();
+            String sql = "SELECT * FROM user WHERE Email=? AND Username=? AND Password=?";
             
-        } else {
-            javax.swing.JOptionPane.showMessageDialog(this, "Invalid Email or Password!", "Login Failed.", javax.swing.JOptionPane.ERROR_MESSAGE);
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setString(1, emailInput);
+            pst.setString(2, usernameInput);
+            pst.setString(3, passwordInput);
+            
+            ResultSet rs = pst.executeQuery();
+            
+            if(rs.next()) {
+                JOptionPane.showMessageDialog(this, "Login Successfully!");
+                
+                Dashboard dash = new Dashboard();
+                dash.setVisible(true);
+                this.dispose();
+                
+            } else {
+                JOptionPane.showMessageDialog(this, "Invalid Email, Username, or Password!");
+            }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Login Error: " + e.getMessage());  
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

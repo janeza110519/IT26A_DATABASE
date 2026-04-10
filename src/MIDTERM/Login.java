@@ -232,32 +232,36 @@ public class Login extends javax.swing.JFrame {
         String emailInput = jTextField1.getText().trim(); 
         String usernameInput = jTextField2.getText().trim();
         String passwordInput = new String(jPasswordField1.getPassword()).trim();
-        
+
         try {
             Connection con = DBConnection.getConnection();
-            
+
             String sql = "SELECT * FROM user WHERE Email=? AND Username=? AND Password=?";
-            
+
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, emailInput);
             pst.setString(2, usernameInput);
             pst.setString(3, passwordInput);
-            
+
             ResultSet rs = pst.executeQuery();
-            
+
             if(rs.next()) {
+
                 JOptionPane.showMessageDialog(this, "Login Successfully!");
-                
+
                 Dashboard dash = new Dashboard();
                 dash.setVisible(true);
                 this.dispose();
-                
+
             } else {
+
                 JOptionPane.showMessageDialog(this, "Invalid Email, Username, or Password!");
             }
-            
+
         } catch (Exception e) {
+
             JOptionPane.showMessageDialog(this, "Login Error: " + e.getMessage());  
+  
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

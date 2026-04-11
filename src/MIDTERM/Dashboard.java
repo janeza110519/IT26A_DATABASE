@@ -151,7 +151,10 @@ public class Dashboard extends javax.swing.JFrame {
 
         txtid.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null}
+                {"1", "Janeza ", "janeza@gmail.com", "janeza_123"},
+                {"2", "Mark", "mark@gmail.com", "mark_222"},
+                {"3", "Dave", "dave@gmail.com", "dave1_1"},
+                {"4", "Jason", "jason@gmail.com", "jason_12"}
             },
             new String [] {
                 "User ID", "Name", "Email", "Username"
@@ -164,7 +167,7 @@ public class Dashboard extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(txtid);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 560, 120));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 270, 560, 210));
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -206,7 +209,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 80, 200, 70));
+        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 130, 200, 70));
 
         jPanel.setBackground(new java.awt.Color(255, 255, 255));
         jPanel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -249,7 +252,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        getContentPane().add(jPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 130, 70));
+        getContentPane().add(jPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 130, 70));
 
         jPanel55.setBackground(new java.awt.Color(255, 255, 255));
         jPanel55.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -293,7 +296,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel55, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 80, 170, 70));
+        getContentPane().add(jPanel55, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 130, 170, 70));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

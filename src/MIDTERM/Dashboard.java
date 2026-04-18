@@ -439,28 +439,31 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        
         try {
             Connection con = DBConnection.getConnection();
-            String sql = "INSERT INTO user (Username, Email, Full_name) VALUES (?, ?, ?)";
+            String sql = "INSERT INTO user (username, email, Full_name) VALUES (?, ?, ?)";
             PreparedStatement pst = con.prepareStatement(sql);
-            
+
             pst.setString(1, jTextField2.getText());
             pst.setString(2, jTextField3.getText());
             pst.setString(3, jTextField4.getText());
-            
+
             pst.executeUpdate();
-            
+
+            javax.swing.JOptionPane.showMessageDialog(this, "User added successfully!");
+
+            loadData();
+
+    // clear fields
             jTextField1.setText("");
             jTextField2.setText("");
             jTextField3.setText("");
             jTextField4.setText("");
-            javax.swing.JOptionPane.showMessageDialog(this, "Inserted successfully!");
 
-            
-            loadData();
-            
         } catch (Exception e) {
             e.printStackTrace();
+            javax.swing.JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -507,6 +510,11 @@ public class Dashboard extends javax.swing.JFrame {
                 pst.setInt(1, Integer.parseInt(jTextField1.getText()));
 
                 pst.executeUpdate();
+
+                jTextField1.setText("");
+                jTextField2.setText("");
+                jTextField3.setText("");
+                jTextField4.setText("");
                 loadData();
             
 

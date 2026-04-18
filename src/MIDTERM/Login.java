@@ -246,34 +246,41 @@ public class Login extends javax.swing.JFrame {
         String emailInput = jTextField1.getText().trim(); 
         String usernameInput = jTextField2.getText().trim();
         String passwordInput = new String(jPasswordField1.getPassword()).trim();
+        
+        if (emailInput.isEmpty() || usernameInput.isEmpty() || passwordInput.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill in all fields!");
+            return;
+        }
 
         try {
             Connection con = DBConnection.getConnection();
 
-            String sql = "SELECT * FROM user WHERE Email=? AND Username=? AND Password=?";
-
+            String sql = "SELECT * FROM user WHERE Email=? AND Username=?;
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, emailInput);
             pst.setString(2, usernameInput);
-            pst.setString(3, passwordInput);
 
             ResultSet rs = pst.executeQuery();
 
-            if(rs.next()) {
-
-                JOptionPane.showMessageDialog(this, "Login Successfully!");
-
-                Dashboard dash = new Dashboard();
-                dash.setVisible(true);
-                this.dispose();
-
-            } else {
-
-                JOptionPane.showMessageDialog(this, "Invalid Email, Username, or Password!");
+            if(!rs.next()) {
+                JOptionPane.showMessageDialog(this, "No account found! Please Sign up.");
+                return;
             }
 
-        } catch (Exception e) {
+            String dbPassword = rs.getString("Password");
 
+            if (!passwordInput.equals(dbPassword)) {
+                JOptionPane.showMessageDialog(this, "Invalid Password!");
+                return;
+            }
+
+            JOptionPane.showMessageDialog(this, "Login Successfully!");
+
+            Dashboard dash = new Dashboard();
+            dash.setVisible(true);
+            this.dispose();
+            
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Login Error: " + e.getMessage());  
   
         }

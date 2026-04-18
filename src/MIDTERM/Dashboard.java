@@ -169,11 +169,21 @@ public class Dashboard extends javax.swing.JFrame {
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Insert");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton5.setBackground(new java.awt.Color(0, 102, 102));
         jButton5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton5.setForeground(new java.awt.Color(255, 255, 255));
         jButton5.setText("Update");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton7.setBackground(new java.awt.Color(0, 102, 102));
         jButton7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -422,6 +432,49 @@ public class Dashboard extends javax.swing.JFrame {
         jTextField4.setText(jTable1.getValueAt(row, 3).toString());
         
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        try {
+            Connection con = DBConnection.getConnection();
+            String sql = "INSERT INTO users (username, email, fullname) VALUES (?, ?, ?";
+            PreparedStatement pst = con.prepareStatement(sql);
+            
+            pst.setString(1, jTextField2.getText());
+            pst.setString(2, jTextField3.getText());
+            pst.setString(3, jTextField4.getText());
+            
+            pst.executeUpdate();
+            
+            loadData();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        if (jTextField1.getText().isEmpty()) {
+            try {
+                Connection con = DBConnection.getConnection();
+                String sql = "UPDATE users SET username=?, email=?, fullname=? WHERE id=?";
+                PreparedStatement pst = con.prepareStatement(sql);
+                
+                pst.setString(1, jTextField2.getText());
+                pst.setString(2, jTextField3.getText());
+                pst.setString(3, jTextField4.getText());
+                pst.setInt(4, Integer.parseInt(jTextField1.getText()));
+                
+                pst.executeUpdate();
+                
+                loadData();
+                
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments

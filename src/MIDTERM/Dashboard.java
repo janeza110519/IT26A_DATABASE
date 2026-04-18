@@ -2,13 +2,17 @@
 package MIDTERM;
 
 import javax.swing.table.DefaultTableModel;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 
 public class Dashboard extends javax.swing.JFrame {
 
     public Dashboard() {
         initComponents();
-        
+        loadData();
+
         jPanel2.setSize(this.getWidth(),jPanel2.getHeight());
         this.setLocationRelativeTo(null);
         
@@ -24,7 +28,32 @@ public class Dashboard extends javax.swing.JFrame {
         
         jTable1.setModel(model);
         
+        loadData();
     }
+    
+    public void loadData() {
+    try {
+        Connection con = DBConnection.getConnection();
+        String sql = "SELECT * FROM users";
+        PreparedStatement pst = con.prepareStatement(sql);
+        ResultSet rs = pst.executeQuery();
+
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+
+        while (rs.next()) {
+            model.addRow(new Object[]{
+                rs.getInt("id"),
+                rs.getString("username"),
+                rs.getString("email"),
+                rs.getString("fullname")
+            });
+        }
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
     
 
     @SuppressWarnings("unchecked")
@@ -357,9 +386,14 @@ public class Dashboard extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Username", "Email", "Fullname"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, 560, -1));
@@ -377,6 +411,17 @@ public class Dashboard extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        int row = jTable1.getSelectedRow();
+
+        jTextField1.setText(jTable1.getValueAt(row, 0).toString());
+        jTextField2.setText(jTable1.getValueAt(row, 1).toString());
+        jTextField3.setText(jTable1.getValueAt(row, 2).toString());
+        jTextField4.setText(jTable1.getValueAt(row, 3).toString());
+        
+    }//GEN-LAST:event_jTable1MouseClicked
 
     /**
      * @param args the command line arguments

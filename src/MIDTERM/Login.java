@@ -231,6 +231,8 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        // For Sign up;
+        
         Signup SignUpFrame = new Signup();
         SignUpFrame.setVisible(true);
         SignUpFrame.pack();
@@ -240,7 +242,7 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        // LOGIN 
+        // For LOGIN; 
         
         String emailInput = jTextField1.getText().trim(); 
         String usernameInput = jTextField2.getText().trim();

@@ -255,7 +255,7 @@ public class Login extends javax.swing.JFrame {
         try {
             Connection con = DBConnection.getConnection();
 
-            String sql = "SELECT * FROM user WHERE Email=? AND Username=?;
+            String sql = "SELECT * FROM user WHERE Email=? AND Username=?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, emailInput);
             pst.setString(2, usernameInput);

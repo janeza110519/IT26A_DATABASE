@@ -189,6 +189,11 @@ public class Dashboard extends javax.swing.JFrame {
         jButton7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton7.setForeground(new java.awt.Color(255, 255, 255));
         jButton7.setText("Delete");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -437,7 +442,7 @@ public class Dashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             Connection con = DBConnection.getConnection();
-            String sql = "INSERT INTO users (username, email, fullname) VALUES (?, ?, ?";
+            String sql = "INSERT INTO users (username, email, fullname) VALUES (?, ?, ?)";
             PreparedStatement pst = con.prepareStatement(sql);
             
             pst.setString(1, jTextField2.getText());
@@ -455,26 +460,55 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+
         if (jTextField1.getText().isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Select a record first!");
+            return;
+        }
             try {
                 Connection con = DBConnection.getConnection();
                 String sql = "UPDATE users SET username=?, email=?, fullname=? WHERE id=?";
                 PreparedStatement pst = con.prepareStatement(sql);
-                
+
                 pst.setString(1, jTextField2.getText());
                 pst.setString(2, jTextField3.getText());
                 pst.setString(3, jTextField4.getText());
                 pst.setInt(4, Integer.parseInt(jTextField1.getText()));
-                
+
                 pst.executeUpdate();
-                
                 loadData();
-                
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        if (jTextField1.getText().isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Select a record first!");
+            return;
+        }
+        int confirm = javax.swing.JOptionPane.showConfirmDialog(this, "Are you sure you want to delete?", "Confirm Delete", javax.swing.JOptionPane.YES_NO_OPTION);
+
+        if (confirm == javax.swing.JOptionPane.YES_OPTION) {
+
+            try {
+                Connection con = DBConnection.getConnection();
+                String sql = "DELETE FROM users WHERE id=?";
+                PreparedStatement pst = con.prepareStatement(sql);
+
+                pst.setInt(1, Integer.parseInt(jTextField1.getText()));
+
+                pst.executeUpdate();
+                loadData();
+            
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -11,7 +11,6 @@ public class Dashboard extends javax.swing.JFrame {
 
     public Dashboard() {
         initComponents();
-        loadData();
 
         jPanel2.setSize(this.getWidth(),jPanel2.getHeight());
         this.setLocationRelativeTo(null);
@@ -24,7 +23,7 @@ public class Dashboard extends javax.swing.JFrame {
         model.addColumn("ID");
         model.addColumn("Username");
         model.addColumn("Email");
-        model.addColumn("Fullname");
+        model.addColumn("Full Name");
         
         jTable1.setModel(model);
         
@@ -34,7 +33,7 @@ public class Dashboard extends javax.swing.JFrame {
     public void loadData() {
     try {
         Connection con = DBConnection.getConnection();
-        String sql = "SELECT * FROM users";
+        String sql = "SELECT * FROM user";
         PreparedStatement pst = con.prepareStatement(sql);
         ResultSet rs = pst.executeQuery();
 
@@ -46,7 +45,7 @@ public class Dashboard extends javax.swing.JFrame {
                 rs.getInt("id"),
                 rs.getString("username"),
                 rs.getString("email"),
-                rs.getString("fullname")
+                rs.getString("Full_name")
             });
         }
 
@@ -442,7 +441,7 @@ public class Dashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             Connection con = DBConnection.getConnection();
-            String sql = "INSERT INTO users (username, email, fullname) VALUES (?, ?, ?)";
+            String sql = "INSERT INTO user (Username, Email, Full_name) VALUES (?, ?, ?)";
             PreparedStatement pst = con.prepareStatement(sql);
             
             pst.setString(1, jTextField2.getText());
@@ -450,6 +449,13 @@ public class Dashboard extends javax.swing.JFrame {
             pst.setString(3, jTextField4.getText());
             
             pst.executeUpdate();
+            
+            jTextField1.setText("");
+            jTextField2.setText("");
+            jTextField3.setText("");
+            jTextField4.setText("");
+            javax.swing.JOptionPane.showMessageDialog(this, "Inserted successfully!");
+
             
             loadData();
             
@@ -467,7 +473,7 @@ public class Dashboard extends javax.swing.JFrame {
         }
             try {
                 Connection con = DBConnection.getConnection();
-                String sql = "UPDATE users SET username=?, email=?, fullname=? WHERE id=?";
+                String sql = "UPDATE user SET Username=?, Email=?, Full_name=? WHERE id=?";
                 PreparedStatement pst = con.prepareStatement(sql);
 
                 pst.setString(1, jTextField2.getText());
@@ -495,7 +501,7 @@ public class Dashboard extends javax.swing.JFrame {
 
             try {
                 Connection con = DBConnection.getConnection();
-                String sql = "DELETE FROM users WHERE id=?";
+                String sql = "DELETE FROM user WHERE id=?";
                 PreparedStatement pst = con.prepareStatement(sql);
 
                 pst.setInt(1, Integer.parseInt(jTextField1.getText()));

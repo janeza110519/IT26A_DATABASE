@@ -434,7 +434,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        // For logout bt;
+        // For logout btn;
         
         int confirm = javax.swing.JOptionPane.showConfirmDialog(this, "Are you sure you want to log out?", "Logout Confirmation",javax.swing.JOptionPane. YES_NO_OPTION);
         
@@ -458,7 +458,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        // For insert bt;
+        // For insert btn;
         
         try {
             Connection con = DBConnection.getConnection();
@@ -489,7 +489,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        // For update bt;
+        // For update btn;
 
         if (jTextField1.getText().isEmpty()) {
             javax.swing.JOptionPane.showMessageDialog(this, "Select a record first!");
@@ -527,7 +527,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
-        // For delete bt;
+        // For delete btn;
         
         if (jTextField1.getText().isEmpty()) {
             javax.swing.JOptionPane.showMessageDialog(this, "Select a record first!");

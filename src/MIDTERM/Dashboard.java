@@ -505,8 +505,20 @@ public class Dashboard extends javax.swing.JFrame {
                 pst.setString(3, jTextField4.getText());
                 pst.setInt(4, Integer.parseInt(jTextField1.getText()));
 
-                pst.executeUpdate();
-                loadData();
+                int rowsUpdated = pst.executeUpdate();
+                
+                if (rowsUpdated > 0) {
+                    javax.swing.JOptionPane.showMessageDialog(this, "Updated Sucessfully!");
+                    
+                    loadData();
+                    
+                    jTextField1.setText("");
+                    jTextField2.setText("");
+                    jTextField3.setText("");
+                    jTextField4.setText("");
+                    
+                }
+                
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -532,13 +544,19 @@ public class Dashboard extends javax.swing.JFrame {
 
                 pst.setInt(1, Integer.parseInt(jTextField1.getText()));
 
-                pst.executeUpdate();
-
-                jTextField1.setText("");
-                jTextField2.setText("");
-                jTextField3.setText("");
-                jTextField4.setText("");
-                loadData();
+                int result = pst.executeUpdate();
+                
+                if (result > 0); {
+                    javax.swing.JOptionPane.showMessageDialog(this, "Credentials Deleted Successfully!");
+                    
+                    loadData();
+                    
+                    jTextField1.setText("");
+                    jTextField2.setText("");
+                    jTextField3.setText("");
+                    jTextField4.setText("");
+                
+                }  
             
 
             } catch (Exception e) {

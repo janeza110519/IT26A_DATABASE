@@ -546,7 +546,7 @@ public class Dashboard extends javax.swing.JFrame {
 
                 int result = pst.executeUpdate();
                 
-                if (result > 0); {
+                if (result > 0) {
                     javax.swing.JOptionPane.showMessageDialog(this, "Credentials Deleted Successfully!");
                     
                     loadData();
